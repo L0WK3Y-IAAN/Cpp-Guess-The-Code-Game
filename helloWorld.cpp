@@ -1,14 +1,41 @@
 #include <iostream>
+#include <string>
+#include <Windows.h>
+
+ 
+
+  
+  
 
 
-int main()
+
+//Game Introduction
+void Intro()
 {
-//!!! BE SURE TO USE UPPERCAMAL CASE DUE TO UNREAL's VARIABLE NAMING CONVENTIONS
-
-// Expression Statements - Printing to console and ending line.
+    // Expression Statements - Printing to console and ending line.
     system("cls");
-    std::cout << "You are a secret agent breaking into a secure server room...\n";
-    std::cout << "Enter the correct code to continue...\n";
+    std::cout << "Enter your username: ";
+    std::string  PlayerName;
+    std::cin >> PlayerName;
+    system("cls");
+    std::cout << "Hello " + PlayerName << std::endl;
+    Sleep(2000);
+    std::cout << "\nYou are a secret agent breaking into a secure server room...\n";
+    Sleep(2000);
+    std::cout << "\nEnter the correct code to hack the terminal...\n";
+    Sleep(3000); 
+    //Press any key to continue . . .
+    system("pause");
+
+}
+
+
+
+//PlayGame function
+void PlayGame()
+{
+    system("cls");
+    //!!! BE SURE TO USE UPPERCAMAL CASE DUE TO UNREAL's VARIABLE NAMING CONVENTIONS
 
 //Declaring Variables
     int CodeA = 4;
@@ -30,6 +57,8 @@ int main()
     std::cout << "\n[+] The codes add up to: " << CodeSum;
     std::cout << "\n[+] The product of the code is: " << CodeProduct;
 
+
+    //Store player guess
     int GuessA, GuessB, GuessC, GuessD;
     std::cout << std::endl;
     std::cout << "\nEnter your guess for the code below \n";
@@ -40,16 +69,48 @@ int main()
     int GuessSum = GuessA + GuessB + GuessC + GuessD;
     int GuessProduct = GuessA * GuessB * GuessC * GuessD;
 
+    //Win conditions.
+    if (GuessSum == CodeSum && GuessProduct == CodeProduct) 
+    {
+        std::cout << "You've hacked the terminal!\n\n";
+        Sleep(3000);
+        system("pause");
+        system("cls");
+        int PlayAgain;
+        std::cout << "Would you like to play again?\n1: Yes 2: No\nInput: ", std::cin >> PlayAgain;
 
-//Win conditions.
-    if (GuessSum == CodeSum && GuessProduct == CodeProduct) {
-        std::cout << "You've hacked the terminal!";
+        if (PlayAgain == 1)
+        {
+            Intro();
+            PlayGame();
+        }
+        else if (PlayAgain == 2)
+        {
+            system("cls");
+            exit(0);
+        }
+        
     }
-    else{
-        std::cout << "Incorrect code. Try again.";
+    else
+    {
+        std::cout << "Incorrect code. Try again.\n";
+        system("pause");
+        system("cls");
+        int PlayAgain;
+        std::cout << "Would you like to play again?\n1: Yes 2: No\nInput: ", std::cin >> PlayAgain;
+
+        if (PlayAgain == 1)
+        {
+            Intro();
+            PlayGame();
+        }
+        else if (PlayAgain == 2)
+        {
+            system("cls");
+            exit(0);
+        }
     }
 
-    return 0;
 
 
 /*Vocabulary 
@@ -66,5 +127,20 @@ Preprocessor Directive - Headers that are executed at the start of a program.
 Extraction Operator - (<< or >>)
 const - prevents a variable from being changed.
 
+Void Data Type - The function will not return any data.
+
 */
 }
+
+
+
+int main()
+{
+    while(true)
+    {
+        Intro();
+        PlayGame();
+        return 0;
+    }
+}
+    
